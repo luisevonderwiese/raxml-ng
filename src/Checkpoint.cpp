@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 #include "Checkpoint.hpp"
 #include "io/binary_io.hpp"
 #include "io/file_io.hpp"
@@ -63,19 +64,31 @@ void CheckpointFile::write_tmp_best_tree() const
 {
   /* NB: do not print last-best tree in bootstrapping stage! */
   if (opts.write_interim_results && ml_trees.size() < opts.num_searches)
-    write_tmp_tree(best_tree().tree, opts.tmp_best_tree_file());
+  {
+    if(opts.keep_interim_results)
+    {
+      write_tmp_tree(best_tree().tree, opts.interim_trees_file(), true);
+    }
+    else
+    {
+      write_tmp_tree(best_tree().tree, opts.tmp_best_tree_file());
+    }
+  }
 }
+
 
 void CheckpointFile::write_tmp_ml_tree(const Tree& tree) const
 {
   if (opts.write_interim_results)
     write_tmp_tree(tree, opts.tmp_ml_trees_file(), true);
+
 }
 
 void CheckpointFile::write_tmp_bs_tree(const Tree& tree) const
 {
   if (opts.write_interim_results)
     write_tmp_tree(tree, opts.tmp_bs_trees_file(), true);
+
 }
 
 CheckpointManager::CheckpointManager(const Options& opts) :

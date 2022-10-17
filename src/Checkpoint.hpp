@@ -71,6 +71,7 @@ struct CheckpointFile
   double consumed_wh;
   Options opts;
 
+
   std::vector<Checkpoint> checkp_list;
 
   ModelMap best_models;         /* model parameters for the best-scoring ML tree */

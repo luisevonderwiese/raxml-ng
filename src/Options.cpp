@@ -8,7 +8,7 @@ Options::Options() : opt_version(RAXML_OPT_VERSION), cmdline(""), command(Comman
 use_tip_inner(true), use_pattern_compression(true), use_prob_msa(false), use_rate_scalers(false),
 use_repeats(true), use_rba_partload(true), use_energy_monitor(true), use_old_constraint(false),
 optimize_model(true), optimize_brlen(true), force_mode(false), safety_checks(SafetyCheck::all),
-redo_mode(false), nofiles_mode(false), write_interim_results(true), write_bs_msa(false),
+redo_mode(false), nofiles_mode(false), write_interim_results(true), keep_interim_results(true), write_bs_msa(false),
 log_level(LogLevel::progress), msa_format(FileFormat::autodetect), data_type(DataType::autodetect),
 random_seed(0), start_trees(), lh_epsilon(DEF_LH_EPSILON), spr_radius(-1),
 spr_cutoff(1.0),
@@ -63,6 +63,7 @@ void Options::set_default_outfiles()
   set_default_outfile(outfile_names.tmp_best_tree, "lastTree.TMP");
   set_default_outfile(outfile_names.tmp_ml_trees, "mlTrees.TMP");
   set_default_outfile(outfile_names.tmp_bs_trees, "bootstraps.TMP");
+  set_default_outfile(outfile_names.interim_trees, "interimTrees");
 }
 
 std::string Options::checkp_file() const

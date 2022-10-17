@@ -33,6 +33,7 @@ struct OutputFileNames
   std::string tmp_best_tree;
   std::string tmp_ml_trees;
   std::string tmp_bs_trees;
+  std::string interim_trees;
 };
 
 class Options
@@ -69,6 +70,7 @@ public:
   bool redo_mode;
   bool nofiles_mode;
   bool write_interim_results;
+  bool keep_interim_results;
   bool write_bs_msa;
 
   LogLevel log_level;
@@ -152,6 +154,7 @@ public:
   const std::string tmp_best_tree_file() const { return outfile_names.tmp_best_tree; }
   const std::string tmp_ml_trees_file() const { return outfile_names.tmp_ml_trees; }
   const std::string tmp_bs_trees_file() const { return outfile_names.tmp_bs_trees; }
+  const std::string interim_trees_file() const { return outfile_names.interim_trees; }
 
   void set_default_outfiles();
 
