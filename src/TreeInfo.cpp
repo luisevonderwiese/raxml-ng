@@ -191,8 +191,9 @@ double TreeInfo::loglh(bool incremental)
 double TreeInfo::persite_loglh(std::vector<double*> part_site_lh, bool incremental)
 {
   assert(part_site_lh.size() == _pll_treeinfo->partition_count);
-  return pllmod_treeinfo_compute_loglh_persite(_pll_treeinfo, incremental ? 1 : 0,
+  double r = pllmod_treeinfo_compute_loglh_persite(_pll_treeinfo, incremental ? 1 : 0,
       part_site_lh.data());
+  return r;
 }
 
 

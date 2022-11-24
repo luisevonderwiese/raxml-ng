@@ -2489,6 +2489,9 @@ void print_final_output(const RaxmlInstance& instance, const CheckpointFile& che
       fs << fixed << setprecision(logger().precision(LogElement::loglh));
 
       size_t tree_num = 1;
+      uint64_t val;
+      char *buf = (char*)malloc(sizeof(char));
+      std::cout << instance.persite_loglh.data() << " at print " << std::endl;
       for (auto& tree_slh: instance.persite_loglh)
       {
         fs << "tree" + to_string(tree_num++) + "   ";
@@ -2498,10 +2501,16 @@ void print_final_output(const RaxmlInstance& instance, const CheckpointFile& che
           auto lh = tree_slh[coord.first][coord.second];
 
           /* NB: loglh was already multiplied with pattern weight -> undo it */
-          auto& w = parted_msa.part_info(coord.first).msa().weights();
-          if (!w.empty())
-            lh /= w[coord.second];
-          fs << " " << lh;
+          //auto& w = parted_msa.part_info(coord.first).msa().weights();
+
+          //if (!w.empty())
+            //lh /= w[coord.second];
+          fs << " ";
+          memcpy(&val, &lh, sizeof(val));
+          for(int x = 63; x >=0; x--){
+            sprintf(buf, "%c", '0' + !!(val & (1ULL << x)));
+            fs << buf;
+          }
         }
         fs << endl;
       }
