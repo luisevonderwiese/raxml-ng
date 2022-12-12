@@ -79,8 +79,14 @@ void CheckpointFile::write_tmp_best_tree() const
 
 void CheckpointFile::write_tmp_ml_tree(const Tree& tree) const
 {
-  if (opts.write_interim_results)
+  if (opts.write_interim_results){
     write_tmp_tree(tree, opts.tmp_ml_trees_file(), true);
+    if(opts.keep_interim_results)
+    {
+      write_tmp_tree(tree, opts.interim_trees_file(), true);
+    }
+  }
+
 
 }
 
